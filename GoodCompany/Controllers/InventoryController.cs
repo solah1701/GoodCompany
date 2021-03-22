@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoodCompany.Controllers
 {
-    public class DeviceController : Controller
+    public class InventoryController : Controller
     {
         private List<Models.DeviceItem> model;
 
