@@ -16,15 +16,15 @@ namespace GoodCompany.Models
         /// Note, this particular Id will be duplicated and will be used
         /// next to the DeviceFieldNameId as a combined key
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// Reference to Device Field Name
         /// </summary>
-        public Guid DeviceFieldNameId { get; set; }
+        public int DeviceFieldNameId { get; set; }
         /// <summary>
         /// Reference to Device Type
         /// </summary>
-        public Guid DeviceTypeId { get; set; }
+        public int DeviceTypeId { get; set; }
         /// <summary>
         /// The value for the given field of the item
         /// </summary>

@@ -13,7 +13,7 @@ namespace GoodCompany.Models
         /// <summary>
         /// Device Type Id
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// The name of the Device Type
         /// </summary>

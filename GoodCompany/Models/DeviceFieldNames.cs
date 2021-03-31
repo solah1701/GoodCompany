@@ -13,11 +13,11 @@ namespace GoodCompany.Models
         /// <summary>
         /// Device Field Name Id
         /// </summary>
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         /// <summary>
         /// Reference to Device Type
         /// </summary>
-        public Guid DeviceTypeId { get; set; }
+        public int DeviceTypeId { get; set; }
         /// <summary>
         /// The name of the field.  Can be used in the UI for table headers or label names
         /// </summary>

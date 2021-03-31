@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GoodCompany.Services
+namespace GoodCompany.Adapters
 {
-    public interface IPersistence<T>
+    public class DeviceAdapter
     {
-        void Save(T item);
-        T Load();
     }
 }

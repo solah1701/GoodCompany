@@ -9,7 +9,7 @@ namespace GoodCompany.Controllers
 {
     public class InventoryController : Controller
     {
-        private List<Models.DeviceItem> model;
+        private List<Models.DeviceItem> model = new List<Models.DeviceItem>();
 
         // GET: DeviceController
         public ActionResult Index()
@@ -37,6 +37,7 @@ namespace GoodCompany.Controllers
         {
             try
             {
+                model.Add(new Models.DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceTypeId = int.Parse(collection["DeviceTypeId"]) });
                 return RedirectToAction(nameof(Index));
             }
             catch
