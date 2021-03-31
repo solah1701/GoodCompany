@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using GoodCompany.Models;
+using GoodCompany.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,13 +11,17 @@ namespace GoodCompany.Controllers
 {
     public class InventoryController : Controller
     {
-        private List<Models.DeviceItem> model = new List<Models.DeviceItem>();
+        private readonly IPersistence<DeviceItem> devicePersistenceService;
+
+        public InventoryController(IPersistence<DeviceItem> devicePersistence)
+        {
+            devicePersistenceService = devicePersistence;
+        }
 
         // GET: DeviceController
         public ActionResult Index()
         {
-            if (model == null) model = new List<Models.DeviceItem>();
-            return View(model);
+            return View(devicePersistenceService.Load());
         }
 
         // GET: DeviceController/Details/5
@@ -37,7 +43,9 @@ namespace GoodCompany.Controllers
         {
             try
             {
-                model.Add(new Models.DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceTypeId = int.Parse(collection["DeviceTypeId"]) });
+                var model = devicePersistenceService.Load();
+                model.Add(new DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceTypeId = int.Parse(collection["DeviceTypeId"]) });
+                devicePersistenceService.Save(model);
                 return RedirectToAction(nameof(Index));
             }
             catch
