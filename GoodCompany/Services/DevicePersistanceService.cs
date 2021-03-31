@@ -19,9 +19,15 @@ namespace GoodCompany.Services
             return data;
         }
 
-        public void Save(List<DeviceItem> item)
+        public void Add(DeviceItem item)
         {
-            data = item;
+            if (data.Exists(x => x.Id == item.Id)) throw new ArgumentException("Id already exists");
+            data.Add(item);
+        }
+
+        public void Save()
+        {
+
         }
     }
 }

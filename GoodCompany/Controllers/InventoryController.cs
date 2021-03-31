@@ -44,8 +44,8 @@ namespace GoodCompany.Controllers
             try
             {
                 var model = devicePersistenceService.Load();
-                model.Add(new DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceTypeId = int.Parse(collection["DeviceTypeId"]) });
-                devicePersistenceService.Save(model);
+                devicePersistenceService.Add(new DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceTypeId = int.Parse(collection["DeviceTypeId"]) });
+                devicePersistenceService.Save();
                 return RedirectToAction(nameof(Index));
             }
             catch

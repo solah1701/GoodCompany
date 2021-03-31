@@ -7,7 +7,8 @@ namespace GoodCompany.Services
 {
     public interface IPersistence<T>
     {
-        void Save(List<T> item);
+        void Add(T item);
+        void Save();
         List<T> Load();
     }
 }
