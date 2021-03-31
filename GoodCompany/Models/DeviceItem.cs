@@ -24,7 +24,7 @@ namespace GoodCompany.Models
         /// <summary>
         /// Reference to Device Type
         /// </summary>
-        public int DeviceTypeId { get; set; }
+        public string DeviceType { get; set; }
         /// <summary>
         /// The value for the given field of the item
         /// </summary>

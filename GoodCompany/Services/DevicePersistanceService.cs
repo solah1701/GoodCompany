@@ -8,7 +8,7 @@ namespace GoodCompany.Services
 {
     public class DevicePersistanceService : IPersistence<DeviceItem>
     {
-        private List<DeviceItem> data;
+        private readonly List<DeviceItem> data;
 
         public DevicePersistanceService()
         {

@@ -12,10 +12,14 @@ namespace GoodCompany.Controllers
     public class InventoryController : Controller
     {
         private readonly IPersistence<DeviceItem> devicePersistenceService;
-
-        public InventoryController(IPersistence<DeviceItem> devicePersistence)
+        private readonly IPersistence<DeviceType> deviceTypePersistenceService;
+        public InventoryController(
+            IPersistence<DeviceItem> devicePersistence,
+            IPersistence<DeviceType> deviceTypePersistence
+            )
         {
             devicePersistenceService = devicePersistence;
+            deviceTypePersistenceService = deviceTypePersistence;
         }
 
         // GET: DeviceController
@@ -33,6 +37,7 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Create
         public ActionResult Create()
         {
+            ViewBag.DeviceTypes = deviceTypePersistenceService.Load();
             return View();
         }
 
@@ -44,7 +49,7 @@ namespace GoodCompany.Controllers
             try
             {
                 var model = devicePersistenceService.Load();
-                devicePersistenceService.Add(new DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceTypeId = int.Parse(collection["DeviceTypeId"]) });
+                devicePersistenceService.Add(new DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceType = collection["DeviceType"] });
                 devicePersistenceService.Save();
                 return RedirectToAction(nameof(Index));
             }
