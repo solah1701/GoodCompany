@@ -27,6 +27,8 @@ namespace GoodCompany
         {
             services.AddSingleton<IPersistence<DeviceItem>, DevicePersistanceService>();
             services.AddSingleton<IPersistence<DeviceType>, DeviceTypePersistanceService>();
+            services.AddSingleton<IPersistence<DeviceFieldNames>, DeviceFieldNamePersistanceService>();
+
             services.AddControllersWithViews();
         }
 

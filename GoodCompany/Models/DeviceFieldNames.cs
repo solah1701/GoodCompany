@@ -17,7 +17,7 @@ namespace GoodCompany.Models
         /// <summary>
         /// Reference to Device Type
         /// </summary>
-        public int DeviceTypeId { get; set; }
+        public string DeviceType { get; set; }
         /// <summary>
         /// The name of the field.  Can be used in the UI for table headers or label names
         /// </summary>
