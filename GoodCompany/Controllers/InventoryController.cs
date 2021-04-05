@@ -24,28 +24,32 @@ namespace GoodCompany.Controllers
         }
 
         // GET: DeviceController
-        public ActionResult ComputerIndex()
+        public ActionResult Index()
         {
             return View(computerPersistenceService.Load());
         }
 
         // GET: DeviceController/Details/5
-        public ActionResult ComputerDetails(int id)
+        public ActionResult Details(int id)
         {
-            return View();
+            return View(computerPersistenceService.Load().First(item => item.Id == id));
         }
 
         // GET: DeviceController/Create
-        public ActionResult ComputerCreate()
+        public ActionResult Create()
         {
-            ViewBag.DeviceTypes = computerPersistenceService.Load();
+            ViewBag.DeviceTypes = new List<string>
+            {
+                "Desktop PC",
+                "Laptop"
+            };
             return View();
         }
 
         // POST: DeviceController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ComputerCreate(IFormCollection collection)
+        public ActionResult Create(IFormCollection collection)
         {
             try
             {

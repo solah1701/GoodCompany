@@ -4,13 +4,13 @@
     ViewData["Title"] = "Create Computer";
 }
 
-<h1>CreateComputer</h1>
+<h1>Create Computer</h1>
 
 <h4>Computer</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateComputer">
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Id" class="control-label"></label>
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ComputerType" class="control-label"></label>
-                <input asp-for="ComputerType" class="form-control" />
+                @Html.DropDownListFor(model => model.ComputerType, new SelectList(ViewBag.DeviceTypes), "Select Device Type")
                 <span asp-validation-for="ComputerType" class="text-danger"></span>
             </div>
             <div class="form-group">
