@@ -11,58 +11,55 @@ namespace GoodCompany.Controllers
 {
     public class InventoryController : Controller
     {
-        private readonly IPersistence<DeviceItem> devicePersistenceService;
-        private readonly IPersistence<DeviceType> deviceTypePersistenceService;
         private readonly IPersistence<Computer> computerPersistenceService;
         private readonly IPersistence<Laptop> laptopPersistenceService;
 
         public InventoryController(
-            IPersistence<DeviceItem> devicePersistence,
-            IPersistence<DeviceType> deviceTypePersistence,
             IPersistence<Computer> computerPersistence,
             IPersistence<Laptop> laptopPersistence
             )
         {
-            devicePersistenceService = devicePersistence;
-            deviceTypePersistenceService = deviceTypePersistence;
             computerPersistenceService = computerPersistence;
             laptopPersistenceService = laptopPersistence;
         }
 
         // GET: DeviceController
-        public ActionResult Index()
-        {
-            return View(devicePersistenceService.Load());
-        }
-
         public ActionResult ComputerIndex()
         {
             return View(computerPersistenceService.Load());
         }
 
         // GET: DeviceController/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ComputerDetails(int id)
         {
             return View();
         }
 
         // GET: DeviceController/Create
-        public ActionResult Create()
+        public ActionResult ComputerCreate()
         {
-            ViewBag.DeviceTypes = deviceTypePersistenceService.Load();
+            ViewBag.DeviceTypes = computerPersistenceService.Load();
             return View();
         }
 
         // POST: DeviceController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult ComputerCreate(IFormCollection collection)
         {
             try
             {
-                var model = devicePersistenceService.Load();
-                devicePersistenceService.Add(new DeviceItem { Id = int.Parse(collection["Id"]), DeviceFieldNameId = int.Parse(collection["DeviceFieldNameId"]), DeviceType = collection["DeviceType"] });
-                devicePersistenceService.Save();
+                var model = computerPersistenceService.Load();
+                computerPersistenceService.Add(new Computer { 
+                    Id = int.Parse(collection["Id"]), 
+                    ComputerType = collection["ComputerType"] ,
+                    Processor = collection["Processor"],
+                    Brand = collection["Brand"],
+                    UsbPorts = int.Parse(collection["UsbPorts"]),
+                    RamSlots = int.Parse(collection["RamSlots"]),
+                    FormFactor = collection["FormFactor"],
+                    Quantity = int.Parse(collection["Quantity"])
+                });
                 return RedirectToAction(nameof(Index));
             }
             catch
