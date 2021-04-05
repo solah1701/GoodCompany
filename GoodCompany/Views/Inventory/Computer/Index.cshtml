@@ -1,0 +1,77 @@
+﻿@model IEnumerable<GoodCompany.Models.Computer>
+
+@{
+    ViewData["Title"] = "Computer Index";
+}
+
+<h1>View</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComputerType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Processor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UsbPorts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RamSlots)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FormFactor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComputerType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Processor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Brand)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UsbPorts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RamSlots)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FormFactor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantity)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
