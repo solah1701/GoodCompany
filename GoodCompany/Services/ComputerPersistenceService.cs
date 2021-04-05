@@ -13,6 +13,28 @@ namespace GoodCompany.Services
         public ComputerPersistenceService()
         {
             data = new List<Computer>();
+            data.Add(new Computer
+            {
+                Id = 1,
+                ComputerType = "Desktop PC",
+                Processor = "i7",
+                Brand = "Hewlett Packard",
+                UsbPorts = 6,
+                RamSlots = 2,
+                FormFactor = "Slim",
+                Quantity = 3
+            });
+            data.Add(new Computer
+            {
+                Id = 2,
+                ComputerType = "Desktop PC",
+                Processor = "i5",
+                Brand = "Dell",
+                UsbPorts = 2,
+                RamSlots = 3,
+                FormFactor = "Maxi",
+                Quantity = 6
+            });
         }
 
 
