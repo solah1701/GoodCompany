@@ -25,9 +25,6 @@ namespace GoodCompany
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<IPersistence<DeviceItem>, DevicePersistanceService>();
-            services.AddSingleton<IPersistence<DeviceType>, DeviceTypePersistanceService>();
-            services.AddSingleton<IPersistence<DeviceFieldNames>, DeviceFieldNamePersistanceService>();
             services.AddSingleton<IPersistence<Computer>, ComputerPersistenceService>();
             services.AddSingleton<IPersistence<Laptop>, LaptopPersistenceService>();
 
