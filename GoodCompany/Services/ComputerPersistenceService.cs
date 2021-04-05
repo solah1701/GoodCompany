@@ -18,7 +18,8 @@ namespace GoodCompany.Services
 
         public void Add(Computer item)
         {
-            throw new NotImplementedException();
+            if (data.Exists(i => i.Id == item.Id)) throw new ArgumentException($"Item Id={item.Id} already exists");
+            data.Add(item);
         }
 
         public List<Computer> Load()
