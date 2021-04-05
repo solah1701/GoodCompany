@@ -10,5 +10,7 @@ namespace GoodCompany.Services
         void Add(T item);
         void Save();
         List<T> Load();
+        void Edit(T item);
+        void Delete(T item);
     }
 }
