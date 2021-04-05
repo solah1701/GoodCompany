@@ -8,6 +8,14 @@ namespace GoodCompany.Services
 {
     public class ComputerPersistenceService : IPersistence<Computer>
     {
+        private readonly List<Computer> data;
+
+        public ComputerPersistenceService()
+        {
+            data = new List<Computer>();
+        }
+
+
         public void Add(Computer item)
         {
             throw new NotImplementedException();
@@ -15,7 +23,7 @@ namespace GoodCompany.Services
 
         public List<Computer> Load()
         {
-            throw new NotImplementedException();
+            return data;
         }
 
         public void Save()

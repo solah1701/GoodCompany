@@ -13,13 +13,20 @@ namespace GoodCompany.Controllers
     {
         private readonly IPersistence<DeviceItem> devicePersistenceService;
         private readonly IPersistence<DeviceType> deviceTypePersistenceService;
+        private readonly IPersistence<Computer> computerPersistenceService;
+        private readonly IPersistence<Laptop> laptopPersistenceService;
+
         public InventoryController(
             IPersistence<DeviceItem> devicePersistence,
-            IPersistence<DeviceType> deviceTypePersistence
+            IPersistence<DeviceType> deviceTypePersistence,
+            IPersistence<Computer> computerPersistence,
+            IPersistence<Laptop> laptopPersistence
             )
         {
             devicePersistenceService = devicePersistence;
             deviceTypePersistenceService = deviceTypePersistence;
+            computerPersistenceService = computerPersistence;
+            laptopPersistenceService = laptopPersistence;
         }
 
         // GET: DeviceController
@@ -30,7 +37,7 @@ namespace GoodCompany.Controllers
 
         public ActionResult ComputerIndex()
         {
-            return View();
+            return View(computerPersistenceService.Load());
         }
 
         // GET: DeviceController/Details/5
