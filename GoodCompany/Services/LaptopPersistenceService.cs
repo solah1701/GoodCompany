@@ -13,6 +13,16 @@ namespace GoodCompany.Services
             throw new NotImplementedException();
         }
 
+        public void Delete(Laptop item)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Edit(Laptop item)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Laptop> Load()
         {
             throw new NotImplementedException();

@@ -75,7 +75,7 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            return View(computerPersistenceService.Load().First(item => item.Id == id));
         }
 
         // POST: DeviceController/Edit/5
@@ -85,6 +85,18 @@ namespace GoodCompany.Controllers
         {
             try
             {
+                computerPersistenceService.Edit(
+                    new Computer
+                    {
+                        Id = int.Parse(collection["Id"]),
+                        ComputerType = collection["ComputerType"],
+                        Processor = collection["Processor"],
+                        Brand = collection["Brand"],
+                        UsbPorts = int.Parse(collection["UsbPorts"]),
+                        RamSlots = int.Parse(collection["RamSlots"]),
+                        FormFactor = collection["FormFactor"],
+                        Quantity = int.Parse(collection["Quantity"])
+                    });
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -96,7 +108,7 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            return View(computerPersistenceService.Load().First(item => item.Id == id));
         }
 
         // POST: DeviceController/Delete/5
@@ -106,6 +118,8 @@ namespace GoodCompany.Controllers
         {
             try
             {
+                var temp = computerPersistenceService.Load().First(item => item.Id == id);
+                computerPersistenceService.Delete(temp);
                 return RedirectToAction(nameof(Index));
             }
             catch

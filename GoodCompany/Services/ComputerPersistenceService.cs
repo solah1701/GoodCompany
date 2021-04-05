@@ -44,6 +44,18 @@ namespace GoodCompany.Services
             data.Add(item);
         }
 
+        public void Delete(Computer item)
+        {
+            data.Remove(item);
+        }
+
+        public void Edit(Computer item)
+        {
+            var temp = data.First(i => i.Id == item.Id);
+            data.Remove(temp);
+            data.Add(item);
+        }
+
         public List<Computer> Load()
         {
             return data;
