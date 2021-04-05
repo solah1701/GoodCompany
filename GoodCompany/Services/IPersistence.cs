@@ -7,6 +7,10 @@ namespace GoodCompany.Services
 {
     public interface IPersistence<T>
     {
-        void Save(T item);
+        void Add(T item);
+        void Save();
+        List<T> Load();
+        void Edit(T item);
+        void Delete(T item);
     }
 }
