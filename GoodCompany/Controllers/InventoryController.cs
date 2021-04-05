@@ -34,8 +34,11 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Details/5
         public ActionResult Details(int id)
         {
-            var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
-            if (computerModel != null) return View(computerModel);
+            if (computerPersistenceService.Load().Exists(item => item.Id == id))
+            {
+                var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
+                return View(computerModel);
+            }
             var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
             return View(laptopModel);
         }
@@ -100,8 +103,11 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Edit/5
         public ActionResult Edit(int id)
         {
-            var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
-            if (computerModel != null) return View(computerModel);
+            if (computerPersistenceService.Load().Exists(item => item.Id == id))
+            {
+                var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
+                return View(computerModel);
+            }
             var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
             return View(laptopModel);
         }
@@ -156,8 +162,11 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Delete/5
         public ActionResult Delete(int id)
         {
-            var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
-            if (computerModel != null) return View(computerModel);
+            if (computerPersistenceService.Load().Exists(item => item.Id == id))
+            {
+                var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
+                return View(computerModel);
+            }
             var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
             return View(laptopModel);
         }
