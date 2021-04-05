@@ -26,13 +26,18 @@ namespace GoodCompany.Controllers
         // GET: DeviceController
         public ActionResult Index()
         {
-            return View(computerPersistenceService.Load());
+            var model = computerPersistenceService.Load();
+            model.AddRange(laptopPersistenceService.Load());
+            return View(model);
         }
 
         // GET: DeviceController/Details/5
         public ActionResult Details(int id)
         {
-            return View(computerPersistenceService.Load().First(item => item.Id == id));
+            var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
+            if (computerModel != null) return View(computerModel);
+            var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
+            return View(laptopModel);
         }
 
         // GET: DeviceController/Create
@@ -53,17 +58,37 @@ namespace GoodCompany.Controllers
         {
             try
             {
-                var model = computerPersistenceService.Load();
-                computerPersistenceService.Add(new Computer { 
-                    Id = int.Parse(collection["Id"]), 
-                    ComputerType = collection["ComputerType"] ,
-                    Processor = collection["Processor"],
-                    Brand = collection["Brand"],
-                    UsbPorts = int.Parse(collection["UsbPorts"]),
-                    RamSlots = int.Parse(collection["RamSlots"]),
-                    FormFactor = collection["FormFactor"],
-                    Quantity = int.Parse(collection["Quantity"])
-                });
+                if (collection["ComputerType"] == "Desktop PC")
+                {
+                    var model = computerPersistenceService.Load();
+                    computerPersistenceService.Add(new Computer
+                    {
+                        Id = int.Parse(collection["Id"]),
+                        ComputerType = collection["ComputerType"],
+                        Processor = collection["Processor"],
+                        Brand = collection["Brand"],
+                        UsbPorts = int.Parse(collection["UsbPorts"]),
+                        RamSlots = int.Parse(collection["RamSlots"]),
+                        FormFactor = collection["FormFactor"],
+                        Quantity = int.Parse(collection["Quantity"])
+                    });
+                }
+                else
+                {
+                    var model = laptopPersistenceService.Load();
+                    laptopPersistenceService.Add(new Laptop
+                    {
+                        Id = int.Parse(collection["Id"]),
+                        ComputerType = collection["ComputerType"],
+                        Processor = collection["Processor"],
+                        Brand = collection["Brand"],
+                        UsbPorts = int.Parse(collection["UsbPorts"]),
+                        RamSlots = int.Parse(collection["RamSlots"]),
+                        FormFactor = collection["FormFactor"],
+                        Quantity = int.Parse(collection["Quantity"]),
+                        ScreenSize = collection["ScreenSize"]
+                    });
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,7 +100,10 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(computerPersistenceService.Load().First(item => item.Id == id));
+            var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
+            if (computerModel != null) return View(computerModel);
+            var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
+            return View(laptopModel);
         }
 
         // POST: DeviceController/Edit/5
@@ -85,18 +113,38 @@ namespace GoodCompany.Controllers
         {
             try
             {
-                computerPersistenceService.Edit(
-                    new Computer
-                    {
-                        Id = int.Parse(collection["Id"]),
-                        ComputerType = collection["ComputerType"],
-                        Processor = collection["Processor"],
-                        Brand = collection["Brand"],
-                        UsbPorts = int.Parse(collection["UsbPorts"]),
-                        RamSlots = int.Parse(collection["RamSlots"]),
-                        FormFactor = collection["FormFactor"],
-                        Quantity = int.Parse(collection["Quantity"])
-                    });
+                if (collection["ComputerType"] == "Desktop PC")
+                {
+                    computerPersistenceService.Edit(
+                      new Computer
+                      {
+                          Id = int.Parse(collection["Id"]),
+                          ComputerType = collection["ComputerType"],
+                          Processor = collection["Processor"],
+                          Brand = collection["Brand"],
+                          UsbPorts = int.Parse(collection["UsbPorts"]),
+                          RamSlots = int.Parse(collection["RamSlots"]),
+                          FormFactor = collection["FormFactor"],
+                          Quantity = int.Parse(collection["Quantity"])
+                      });
+                }
+                else
+                {
+                    laptopPersistenceService.Edit(
+                      new Laptop
+                      {
+                          Id = int.Parse(collection["Id"]),
+                          ComputerType = collection["ComputerType"],
+                          Processor = collection["Processor"],
+                          Brand = collection["Brand"],
+                          UsbPorts = int.Parse(collection["UsbPorts"]),
+                          RamSlots = int.Parse(collection["RamSlots"]),
+                          FormFactor = collection["FormFactor"],
+                          Quantity = int.Parse(collection["Quantity"]),
+                          ScreenSize = collection["ScreenSize"]
+                      });
+
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -108,7 +156,10 @@ namespace GoodCompany.Controllers
         // GET: DeviceController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View(computerPersistenceService.Load().First(item => item.Id == id));
+            var computerModel = computerPersistenceService.Load().First(item => item.Id == id);
+            if (computerModel != null) return View(computerModel);
+            var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
+            return View(laptopModel);
         }
 
         // POST: DeviceController/Delete/5
@@ -119,7 +170,15 @@ namespace GoodCompany.Controllers
             try
             {
                 var temp = computerPersistenceService.Load().First(item => item.Id == id);
-                computerPersistenceService.Delete(temp);
+                if (temp != null)
+                { 
+                    computerPersistenceService.Delete(temp); 
+                }
+                else
+                {
+                    var temp1 = laptopPersistenceService.Load().First(item => item.Id == id);
+                    laptopPersistenceService.Delete(temp1);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
