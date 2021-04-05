@@ -28,6 +28,11 @@ namespace GoodCompany.Controllers
             return View(devicePersistenceService.Load());
         }
 
+        public ActionResult ComputerIndex()
+        {
+            return View();
+        }
+
         // GET: DeviceController/Details/5
         public ActionResult Details(int id)
         {
