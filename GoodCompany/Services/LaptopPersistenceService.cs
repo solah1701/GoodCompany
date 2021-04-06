@@ -8,7 +8,7 @@ namespace GoodCompany.Services
 {
     public class LaptopPersistenceService : IPersistence<Laptop>
     {
-        private List<Laptop> data;
+        private readonly List<Laptop> data;
 
         public LaptopPersistenceService()
         {
