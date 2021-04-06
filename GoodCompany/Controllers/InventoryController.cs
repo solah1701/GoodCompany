@@ -26,7 +26,8 @@ namespace GoodCompany.Controllers
         // GET: DeviceController
         public ActionResult Index()
         {
-            var model = computerPersistenceService.Load();
+            var model = new List<Computer>();
+            model.AddRange(computerPersistenceService.Load());
             model.AddRange(laptopPersistenceService.Load());
             return View(model);
         }
