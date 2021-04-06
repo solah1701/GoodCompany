@@ -41,7 +41,7 @@ namespace GoodCompany.Controllers
                 return View(computerModel);
             }
             var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
-            return View(laptopModel);
+            return View("LaptopDetails", laptopModel);
         }
 
         // GET: DeviceController/Create
@@ -110,7 +110,7 @@ namespace GoodCompany.Controllers
                 return View(computerModel);
             }
             var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
-            return View(laptopModel);
+            return View("LaptopEdit", laptopModel);
         }
 
         // POST: DeviceController/Edit/5
@@ -169,7 +169,7 @@ namespace GoodCompany.Controllers
                 return View(computerModel);
             }
             var laptopModel = laptopPersistenceService.Load().First(item => item.Id == id);
-            return View(laptopModel);
+            return View("LaptopDelete", laptopModel);
         }
 
         // POST: DeviceController/Delete/5
