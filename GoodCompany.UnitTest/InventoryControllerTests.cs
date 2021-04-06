@@ -19,7 +19,38 @@ namespace GoodCompany.UnitTest
             computerPersistence = Substitute.For<IPersistence<Computer>>();
             laptopPersistence = Substitute.For<IPersistence<Laptop>>();
 
+            computerPersistence.Load().Returns(new System.Collections.Generic.List<Computer>
+            {
+                new Computer
+                {
+                    Id=1,
+                    ComputerType="Desktop PC"
+                }
+            });
+
+            laptopPersistence.Load().Returns(new System.Collections.Generic.List<Laptop>
+            {
+                new Laptop
+                {
+                    Id=3,
+                    ComputerType="Laptop"
+                }
+            });
             sut = new InventoryController(computerPersistence, laptopPersistence);
+        }
+
+        [Test]
+        public void Index_calls_computer_load_once()
+        {
+            sut.Index();
+            computerPersistence.Received().Load();
+        }
+
+        [Test]
+        public void Index_calls_laptop_load_once()
+        {
+            sut.Index();
+            laptopPersistence.Received().Load();
         }
     }
 }
